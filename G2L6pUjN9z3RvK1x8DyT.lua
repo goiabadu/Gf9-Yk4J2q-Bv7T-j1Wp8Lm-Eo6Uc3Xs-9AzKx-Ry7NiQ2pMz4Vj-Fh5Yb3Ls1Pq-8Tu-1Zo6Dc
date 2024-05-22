@@ -18,55 +18,7 @@ prepare("GetAllLogs", "SELECT * FROM anticheat_logs")
 prepare("GetAllusers", "SELECT * FROM anticheat")
 prepare("getuerId", "SELECT * FROM anticheat WHERE token = @token")
 prepare("unbanplayer", "UPDATE anticheat SET banned = 0 WHERE user_id = @user_id")
-
-prepare(
-    "anticheat/createTable",
-    [[
-CREATE TABLE IF NOT EXISTS `anticheat` (
-`user_id` int(11) NOT NULL,
-`license` varchar(40) NOT NULL,
-`token` varchar(8) NOT NULL,
-`banned` tinyint(1) DEFAULT 0,
-`created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-`steam` varchar(150) NOT NULL,
-`discord` varchar(100) NOT NULL,
-`live` varchar(150) NOT NULL,
-PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-]]
-)
-
-prepare(
-    "anticheat_logs/createTable",
-    [[
-CREATE TABLE IF NOT EXISTS `anticheat_logs` (
-`id` int(11) NOT NULL AUTO_INCREMENT,
-`nome` varchar(250) NOT NULL,
-`token` varchar(100) NOT NULL,
-`data` varchar(250) NOT NULL,
-`hora` varchar(250) NOT NULL,
-`motivo` varchar(999) NOT NULL,
-PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-]]
-)
-
-prepare(
-    "anticheat/insertData",
-    [[
-INSERT INTO `anticheat` (`user_id`, `license`, `token`, `banned`) VALUES (?, ?, ?, 0);
-]]
-)
-
-AddEventHandler(
-    "onResourceStart",
-    function(resourceName)
-        if (GetCurrentResourceName() == resourceName) then
-            execute("anticheat/createTable", {})
-            execute("anticheat_logs/createTable", {})
-        end
-    end
-)
+prepare("anticheat/insertData",[[INSERT INTO `anticheat` (`user_id`, `license`, `token`, `banned`) VALUES (?, ?, ?, 0);]])
 
 function bye(source, reason)
     DropPlayer(source,reason)
