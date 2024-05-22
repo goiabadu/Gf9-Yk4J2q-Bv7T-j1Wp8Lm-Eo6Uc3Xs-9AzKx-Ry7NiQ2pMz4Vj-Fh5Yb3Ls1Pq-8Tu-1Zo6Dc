@@ -59,7 +59,7 @@ INSERT INTO `anticheat` (`user_id`, `license`, `token`, `banned`) VALUES (?, ?, 
 )
 
 AddEventHandler(
-    "onServerResourceStart",
+    "onResourceStart",
     function(resourceName)
         if (GetCurrentResourceName() == resourceName) then
             execute("anticheat/createTable", {})
@@ -69,7 +69,7 @@ AddEventHandler(
 )
 
 function bye(source, reason)
-    -- DropPlayer(source,reason)
+    DropPlayer(source,reason)
 end
 
 local wall_infos = {}
