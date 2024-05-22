@@ -699,27 +699,6 @@ function RegisterTunnel.CheckImune()
     return isImune(token)
 end
 
-AddEventHandler("onClientResourceStop", function(resource)
-    local source = source
-    if source ~= 0 then
-        local user_id = getUserId(source)
-        local license = GetPlayerRockstarLicense(source)
-        local token = TokenAC(license)
-        
-        SendWebhookMessage(banimentos, "```ini\n[ID]: " .. user_id .. " [BANIDO POR STOPPER]\n[Token]: " .. token .. os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S") .. " \r```" )
-        TriggerClientEvent("bostaliquidabanida", source)
-        
-        if token then
-            print("^2" .. token .. "  " .. "^1banido^0")
-            local nome = getUserIdentity(user_id)
-            local motivo = "BANIDO POR STOPPER!"
-            execute("anticheat/banauto", {license = license, token = token})
-            execute("anticheat/insertlog",{nome = nome, token = token, data = os.date("%d/%m/%Y"), hora = os.date("%H:%M:%S"), motivo = motivo})
-            bye(source, "te peguei gostosa")
-        end
-    end
-end)
-
 function RegisterTunnel.armamentos(weapon)
     local source = source
     local user_id = getUserId(source)
